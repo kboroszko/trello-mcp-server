@@ -51,3 +51,15 @@ class BoardService:
         """
         response = await self.client.GET(f"/boards/{board_id}/labels")
         return [TrelloLabel(**label) for label in response]
+
+    async def create_board_label(self, board_id: str, **kwargs) -> TrelloLabel:
+        """Create label for a specific board.
+
+        Args:
+            board_id (str): The ID of the board whose to add label.
+
+        Returns:
+            List[TrelloLabel]: A list of label objects for the board.
+        """
+        response = await self.client.POST(f"/boards/{board_id}/labels", data=kwargs)
+        return TrelloLabel(**response)
