@@ -38,6 +38,8 @@ def trello_help() -> str:
     1. Board Operations:
        - Get a specific board
        - List all boards
+       - Get board labels
+       - Add label to a board
     2. List Operations:
        - Get a specific list
        - List all lists in a board

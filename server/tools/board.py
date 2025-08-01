@@ -8,6 +8,7 @@ from typing import List
 from mcp.server.fastmcp import Context
 
 from server.models import TrelloBoard, TrelloLabel
+from server.dtos.create_label import CreateLabelPayload
 from server.services.board import BoardService
 from server.trello import client
 
@@ -74,3 +75,27 @@ async def get_board_labels(ctx: Context, board_id: str) -> List[TrelloLabel]:
         logger.error(error_msg)
         await ctx.error(error_msg)
         raise
+
+
+async def create_board_label(ctx: Context, board_id: str, payload: CreateLabelPayload) -> TrelloLabel:
+    """Create label for a specific board.
+
+    Args:
+        board_id (str): The ID of the board whose to add label to.
+        name (str): The name of the label.
+        color (str): The color of the label.
+
+    Returns:
+        TrelloLabel: A label object for the board.
+    """
+    try:
+        logger.info(f"Creating label {payload.name} label for board: {board_id}")
+        result = await service.create_board_label(board_id, **payload.model_dump(exclude_unset=True))
+        logger.info(f"Successfully created label {payload.name} labels for board: {board_id}")
+        return result
+    except Exception as e:
+        error_msg = f"Failed to get board labels: {str(e)}"
+        logger.error(error_msg)
+        await ctx.error(error_msg)
+        raise
+
