@@ -68,12 +68,12 @@ class CardService:
         return TrelloCard(**response)
 
     async def delete_card(self, card_id: str) -> Dict[str, Any]:
-        """Deletes a card.
+        """Deletes a card by archiving it.
 
         Args:
             card_id (str): The ID of the card to delete.
 
         Returns:
-            Dict[str, Any]: The response from the delete operation.
+            Dict[str, Any]: The response from the archive operation.
         """
-        return await self.client.DELETE(f"/cards/{card_id}")
+        return await self.client.PUT(f"/cards/{card_id}", data={"closed": True})

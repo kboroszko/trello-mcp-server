@@ -110,21 +110,21 @@ async def update_card(
 
 
 async def delete_card(ctx: Context, card_id: str) -> dict:
-    """Deletes a card.
+    """Deletes a card by archiving it.
 
     Args:
         card_id (str): The ID of the card to delete.
 
     Returns:
-        dict: The response from the delete operation.
+        dict: The response from the archive operation.
     """
     try:
-        logger.info(f"Deleting card: {card_id}")
+        logger.info(f"Archiving card: {card_id}")
         result = await service.delete_card(card_id)
-        logger.info(f"Successfully deleted card: {card_id}")
+        logger.info(f"Successfully archived card: {card_id}")
         return result
     except Exception as e:
-        error_msg = f"Failed to delete card: {str(e)}"
+        error_msg = f"Failed to archive card: {str(e)}"
         logger.error(error_msg)
         await ctx.error(error_msg)
         raise

@@ -106,22 +106,22 @@ async def update_list(ctx: Context, list_id: str, name: str) -> TrelloList:
         raise
 
 
-async def delete_list(ctx: Context, list_id: str) -> TrelloList:
-    """Archives a list.
+# async def delete_list(ctx: Context, list_id: str) -> TrelloList:
+#     """Archives a list.
 
-    Args:
-        list_id (str): The ID of the list to close.
+#     Args:
+#         list_id (str): The ID of the list to close.
 
-    Returns:
-        TrelloList: The archived list object.
-    """
-    try:
-        logger.info(f"Archiving list: {list_id}")
-        result = await service.delete_list(list_id)
-        logger.info(f"Successfully archived list: {list_id}")
-        return result
-    except Exception as e:
-        error_msg = f"Failed to delete list: {str(e)}"
-        logger.error(error_msg)
-        await ctx.error(error_msg)
-        raise
+#     Returns:
+#         TrelloList: The archived list object.
+#     """
+#     try:
+#         logger.info(f"Archiving list: {list_id}")
+#         result = await service.delete_list(list_id)
+#         logger.info(f"Successfully archived list: {list_id}")
+#         return result
+#     except Exception as e:
+#         error_msg = f"Failed to delete list: {str(e)}"
+#         logger.error(error_msg)
+#         await ctx.error(error_msg)
+#         raise
