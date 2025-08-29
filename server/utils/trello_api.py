@@ -32,15 +32,15 @@ class TrelloClient:
             response.raise_for_status()
             return response.json()
         except httpx.HTTPStatusError as e:
-            logger.error(f"HTTP error: {e}")
+            logger.error(f"HTTP {e.response.status_code} error for endpoint {endpoint}")
             raise httpx.HTTPStatusError(
-                f"Failed to get {endpoint}: {str(e)}",
-                request=e.request,
-                response=e.response,
+                f"Failed to get {endpoint}: HTTP {e.response.status_code}",
+                request=None,
+                response=None,
             )
         except httpx.RequestError as e:
-            logger.error(f"Request error: {e}")
-            raise httpx.RequestError(f"Failed to get {endpoint}: {str(e)}")
+            logger.error(f"Request error for endpoint {endpoint}: Connection failed")
+            raise httpx.RequestError(f"Failed to get {endpoint}: Connection error")
 
     async def POST(self, endpoint: str, data: dict = None):
         all_params = {"key": self.api_key, "token": self.token}
@@ -49,15 +49,15 @@ class TrelloClient:
             response.raise_for_status()
             return response.json()
         except httpx.HTTPStatusError as e:
-            logger.error(f"HTTP error: {e}")
+            logger.error(f"HTTP {e.response.status_code} error for endpoint {endpoint}")
             raise httpx.HTTPStatusError(
-                f"Failed to post to {endpoint}: {str(e)}",
-                request=e.request,
-                response=e.response,
+                f"Failed to post to {endpoint}: HTTP {e.response.status_code}",
+                request=None,
+                response=None,
             )
         except httpx.RequestError as e:
-            logger.error(f"Request error: {e}")
-            raise httpx.RequestError(f"Failed to post to {endpoint}: {str(e)}")
+            logger.error(f"Request error for endpoint {endpoint}: Connection failed")
+            raise httpx.RequestError(f"Failed to post to {endpoint}: Connection error")
 
     async def PUT(self, endpoint: str, data: dict = None):
         all_params = {"key": self.api_key, "token": self.token}
@@ -66,15 +66,15 @@ class TrelloClient:
             response.raise_for_status()
             return response.json()
         except httpx.HTTPStatusError as e:
-            logger.error(f"HTTP error: {e}")
+            logger.error(f"HTTP {e.response.status_code} error for endpoint {endpoint}")
             raise httpx.HTTPStatusError(
-                f"Failed to put to {endpoint}: {str(e)}",
-                request=e.request,
-                response=e.response,
+                f"Failed to put to {endpoint}: HTTP {e.response.status_code}",
+                request=None,
+                response=None,
             )
         except httpx.RequestError as e:
-            logger.error(f"Request error: {e}")
-            raise httpx.RequestError(f"Failed to put to {endpoint}: {str(e)}")
+            logger.error(f"Request error for endpoint {endpoint}: Connection failed")
+            raise httpx.RequestError(f"Failed to put to {endpoint}: Connection error")
 
     async def DELETE(self, endpoint: str, params: dict = None):
         all_params = {"key": self.api_key, "token": self.token}
@@ -85,12 +85,12 @@ class TrelloClient:
             response.raise_for_status()
             return response.json()
         except httpx.HTTPStatusError as e:
-            logger.error(f"HTTP error: {e}")
+            logger.error(f"HTTP {e.response.status_code} error for endpoint {endpoint}")
             raise httpx.HTTPStatusError(
-                f"Failed to delete {endpoint}: {str(e)}",
-                request=e.request,
-                response=e.response,
+                f"Failed to delete {endpoint}: HTTP {e.response.status_code}",
+                request=None,
+                response=None,
             )
         except httpx.RequestError as e:
-            logger.error(f"Request error: {e}")
-            raise httpx.RequestError(f"Failed to delete {endpoint}: {str(e)}")
+            logger.error(f"Request error for endpoint {endpoint}: Connection failed")
+            raise httpx.RequestError(f"Failed to delete {endpoint}: Connection error")
